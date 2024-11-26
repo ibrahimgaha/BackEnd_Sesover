@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-	private static final String[] WHITE_LIST_URL = { "/auth/**" };
+	private static final String[] WHITE_LIST_URL = { "/auth/**", "/teams/**" };
 
 	private final JwtAuthFilter jwtAuthFilter;
 	private final AuthenticationProvider authenticationProvider;

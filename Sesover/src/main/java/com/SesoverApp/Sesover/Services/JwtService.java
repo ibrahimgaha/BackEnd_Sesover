@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import javax.crypto.spec.SecretKeySpec;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,6 @@ import com.SesoverApp.Sesover.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
@@ -60,7 +61,7 @@ public class JwtService {
 	}
 
 	public Key getSignInKey() {
-		return Keys.secretKeyFor(SignatureAlgorithm.HS256); // Generates a secure 256-bit key
+		return new SecretKeySpec(secretKey.getBytes(), SignatureAlgorithm.HS256.getJcaName());
 	}
 
 	public String generateRefreshToken(User user) {

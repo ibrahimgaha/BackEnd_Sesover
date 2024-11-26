@@ -13,6 +13,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +44,10 @@ public class User implements UserDetails {
 
 	@Enumerated(EnumType.STRING)
 	private Role role;
+
+	@ManyToOne
+	@JoinColumn(name = "team_id") // Foreign key column in the User table
+	private Team team; // A user belongs to one team
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
